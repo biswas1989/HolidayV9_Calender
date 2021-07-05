@@ -1,0 +1,95 @@
+<div class='dashboard'>
+
+    <div class="holiday-view">
+
+        <div class="mat-h2 calendar-controller">
+
+            <div class="flex left">
+
+                <!--Month navigation-->
+
+                <!-- 
+                    On click should call navigationArrowMonth
+                -->
+                <button mat-icon-button id="leftMonthKey" aria-label="left naviage" (click)="navigationArrowMonth(0)">
+                    <mat-icon>keyboard_arrow_left
+                    </mat-icon>
+                </button>
+
+                <div id="monthValue" class="nameArrage" style="width: 120px;">
+                    <!-- 
+                        Display month in Alphabets
+                    -->
+                    {{monthInAlphabets[monthIndex]}}
+                </div>
+
+                <!-- 
+                    On click should call navigationArrowMonth
+                    disable when limit reached
+                -->
+                <button [disabled]="monthNavigatorValidation()" mat-icon-button id="rightMonthKey" aria-label="right naviage" (click)="navigationArrowMonth(1)">
+                    <mat-icon>keyboard_arrow_right
+                    </mat-icon>
+                </button>
+
+                <!--Month navigation end-->
+
+                <!--Year navigation-->
+
+                <!--
+                     On click should call navigationArrowYear
+                    -->
+                <button id="leftYearKey" mat-icon-button aria-label="left naviage" (click)="navigationArrowYear(0)">
+                    <mat-icon>keyboard_arrow_left
+                    </mat-icon>
+                </button>
+
+                <div id="yearValue" class="nameArrage" style="width: 80px;">
+                    <!-- 
+                        Display year 
+                     -->
+                   {{year}}
+                </div>
+
+                <!-- 
+                    On click should call navigationArrowYear
+                    disable when limit reached
+                -->
+                <button [disabled]="yearNavigatorValidation()" id="rightYearKey" mat-icon-button aria-label="right naviage" (click)="navigationArrowYear(1)"  >
+                    <mat-icon>keyboard_arrow_right
+                    </mat-icon>
+                </button>
+
+                <!--Year navigation end-->
+
+            </div>
+            <div class="flex">
+                <div class='select-container'>
+                    <!--
+                        On select city the object should be assigned to 'selectedCity'
+
+                    -->
+                    <mat-form-field [style.fontSize.px]="12" class='selector_city' appearance="outline">
+                        <!--
+                                Add mat select here.
+                                mat-select should contain id as "cityDropDown"
+                                The selected city should be assigned to "selectedCity" variable 
+                            -->
+                        <mat-select id="cityDropDown" placeholder="Select" [(ngModel)]="selectedCity" name="selectedCity">
+                            <mat-option *ngFor="let city of cities" [value]="city.cityName">{{city.cityName}}</mat-option>
+
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+            </div>
+
+        </div>
+
+        <app-calendar-view *ngIf='selectedCity' [monthIndex]='monthIndex' [year]='year' [city]='selectedCity'>
+        </app-calendar-view>
+
+    </div>
+
+
+</div>
